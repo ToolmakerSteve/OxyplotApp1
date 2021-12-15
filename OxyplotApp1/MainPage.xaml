@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:oxy="clr-namespace:OxyPlot.Xamarin.Forms;assembly=OxyPlot.Xamarin.Forms"
+             xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
+             x:Class="OxyplotApp1.MainPage">
+
+    <StackLayout>
+        <Label Text="OxyPlot Bar Graphs" HorizontalTextAlignment="Center" FontSize="36"/>
+        <Button Command="{Binding btnLoadGraph}" x:Name="btnLoadGraph" Text="Load Graph" Margin="2" />
+        <!--<oxy:PlotView Model="{Binding GraphModel}" HorizontalOptions="CenterAndExpand"
+VerticalOptions="StartAndExpand" Margin="2"
+HeightRequest="500" WidthRequest="500" BackgroundColor="Pink"/>-->
+        <CollectionView x:Name="Kids">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <xct:Expander x:Name="expander" Tapped="Expander_Tapped">
+                        <xct:Expander.Header>
+                            <Frame Padding="0" CornerRadius="10" Margin="5" BackgroundColor="White" HasShadow="False">
+                                <StackLayout>
+                                    <Grid BackgroundColor="Pink">
+                                        <Image Margin="20" HorizontalOptions="End" Source="arrowDown.png" HeightRequest="15"></Image>
+                                    </Grid>
+                                </StackLayout>
+                            </Frame>
+                        </xct:Expander.Header>
+                        <oxy:PlotView Model="{Binding GraphModel}" HeightRequest="200" WidthRequest="200" />
+                    </xct:Expander>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+
+</ContentPage>
