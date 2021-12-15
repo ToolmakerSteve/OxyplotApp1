@@ -7,14 +7,15 @@
 
     <StackLayout>
         <Label Text="OxyPlot Bar Graphs" HorizontalTextAlignment="Center" FontSize="36"/>
-        <Button Command="{Binding btnLoadGraph}" x:Name="btnLoadGraph" Text="Load Graph" Margin="2" />
+        <!--<Button Command="{Binding btnLoadGraph}" x:Name="btnLoadGraph" Text="Load Graph" Margin="2" />-->
         <!--<oxy:PlotView Model="{Binding GraphModel}" HorizontalOptions="CenterAndExpand"
 VerticalOptions="StartAndExpand" Margin="2"
 HeightRequest="500" WidthRequest="500" BackgroundColor="Pink"/>-->
-        <CollectionView x:Name="Kids">
+        <CollectionView x:Name="Kids" ItemsSource="{Binding KidModels}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <xct:Expander x:Name="expander" Tapped="Expander_Tapped">
+                    <!--<oxy:PlotView Model="{Binding Chart}" HeightRequest="200" WidthRequest="200" />-->
+                    <xct:Expander x:Name="expander" Tapped="Expander_Tapped" ClassId="{Binding RowNumber}">
                         <xct:Expander.Header>
                             <Frame Padding="0" CornerRadius="10" Margin="5" BackgroundColor="White" HasShadow="False">
                                 <StackLayout>
@@ -24,7 +25,7 @@ HeightRequest="500" WidthRequest="500" BackgroundColor="Pink"/>-->
                                 </StackLayout>
                             </Frame>
                         </xct:Expander.Header>
-                        <oxy:PlotView Model="{Binding GraphModel}" HeightRequest="200" WidthRequest="200" />
+                        <oxy:PlotView Model="{Binding Chart}" HeightRequest="200" WidthRequest="200" />
                     </xct:Expander>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

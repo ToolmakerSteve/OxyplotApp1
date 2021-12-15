@@ -3,6 +3,7 @@ using OxyPlot.Axes;
 using OxyPlot.Series;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text;
 using System.Windows.Input;
@@ -12,29 +13,45 @@ namespace OxyplotApp1
 {
 	public class MainPageViewModel : INotifyPropertyChanged
 	{
-		private PlotModel graphModel { get; set; }
+		//private PlotModel graphModel { get; set; }
+		//public PlotModel GraphModel {
+		//	get {
+		//		return graphModel;
+		//	}
+		//	set {
+		//		graphModel = value;
+		//	}
+		//}
 
-		public PlotModel GraphModel {
-			get {
-				return graphModel;
-			}
-			set {
-				graphModel = value;
-			}
-		}
+		//public ICommand btnLoadGraph { get; set; }
 
-		public ICommand btnLoadGraph { get; set; }
+		public ObservableCollection<ReportsClass> KidModels { get; set; } = new ObservableCollection<ReportsClass>() {
+			new ReportsClass(0, "1"),
+			new ReportsClass(1, "2"),
+			new ReportsClass(2, "3"),
+			new ReportsClass(3, "4")
+		};
+
 
 		public MainPageViewModel()
 		{
-			GraphModel = new PlotModel();
-			btnLoadGraph = new Command(LoadBarChart);
+			//GraphModel = new PlotModel();
+			//btnLoadGraph = new Command(LoadBarChart);
 		}
 
-		public void LoadBarChart()
+
+		//public void LoadBarChart()
+		//{
+		//	GraphModel = null;
+		//	OnPropertyChanged("GraphModel");
+		//	PlotModel model = CreateBarChart();
+
+		//	GraphModel = model;
+		//	OnPropertyChanged("GraphModel");
+		//}
+
+		public static PlotModel CreateBarChart()
 		{
-			GraphModel = null;
-			OnPropertyChanged("GraphModel");
 			var model = new PlotModel { Title = "Kinds of Pet People Own - Independent Survey." };
 
 			var barSeries = new ColumnSeries {
@@ -83,8 +100,7 @@ namespace OxyplotApp1
 				Selectable = false,
 			});
 
-			GraphModel = model;
-			OnPropertyChanged("GraphModel");
+			return model;
 		}
 
 		#region INotifyChangedProperties
