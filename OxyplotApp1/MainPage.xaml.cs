@@ -21,15 +21,22 @@ namespace OxyplotApp1
 		MainPageViewModel VM => (MainPageViewModel)BindingContext;
 
 
+		public void ClearExpander()
+		{
+			if (expander != null) {
+				expander.IsExpanded = false;
+				expander = null;
+			}
+		}
+
 		void Expander_Tapped(System.Object sender, System.EventArgs e)
 		{
 			if (ReferenceEquals(sender, expander)) {
 				// User is tapping the existing expander. Don't do anything special.
 				return;
 			}
-			if (expander != null) {
-				expander.IsExpanded = false;
-			}
+
+			ClearExpander();
 
 			expander = sender as Expander;
 
