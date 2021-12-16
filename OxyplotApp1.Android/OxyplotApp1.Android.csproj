@@ -16,7 +16,6 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v11.0</TargetFrameworkVersion>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
     <AndroidUseAapt2>true</AndroidUseAapt2>
@@ -91,7 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OxyplotApp1\OxyplotApp1.csproj">
-      <Project>{7091C04E-8C96-4D12-97D8-66D0B8D0181E}</Project>
+      <Project>{7E277843-80F1-4A09-AA81-F1FACFCB2305}</Project>
       <Name>OxyplotApp1</Name>
     </ProjectReference>
   </ItemGroup>
