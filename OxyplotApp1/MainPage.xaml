@@ -7,15 +7,17 @@
 
     <StackLayout>
         <Label Text="OxyPlot Bar Graphs" HorizontalTextAlignment="Center" FontSize="36"/>
+        
         <!--<Button Command="{Binding btnLoadGraph}" x:Name="btnLoadGraph" Text="Load Graph" Margin="2" />-->
         <!--<oxy:PlotView Model="{Binding GraphModel}" HorizontalOptions="CenterAndExpand"
 VerticalOptions="StartAndExpand" Margin="2"
 HeightRequest="500" WidthRequest="500" BackgroundColor="Pink"/>-->
-        <CollectionView x:Name="Kids" ItemsSource="{Binding KidModels}">
+        
+        <!--<CollectionView x:Name="Kids" ItemsSource="{Binding KidModels}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <!--<oxy:PlotView Model="{Binding Chart}" HeightRequest="200" WidthRequest="200" />-->
-                    <xct:Expander x:Name="expander" Tapped="Expander_Tapped" ClassId="{Binding RowNumber}">
+                    <xct:Expander x:Name="expander" Tapped="Expander_Tapped" ClassId="{Binding RowNumber}"
+                                  AnimationLength="0">
                         <xct:Expander.Header>
                             <Frame Padding="0" CornerRadius="10" Margin="5" BackgroundColor="White" HasShadow="False">
                                 <StackLayout>
@@ -29,7 +31,51 @@ HeightRequest="500" WidthRequest="500" BackgroundColor="Pink"/>-->
                     </xct:Expander>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-        </CollectionView>
+        </CollectionView>-->
+
+        <!--<ListView x:Name="Kids" ItemsSource="{Binding KidModels}" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <xct:Expander x:Name="expander" Tapped="Expander_Tapped" ClassId="{Binding RowNumber}"
+                                  AnimationLength="0">
+                            <xct:Expander.Header>
+                                <Frame Padding="0" CornerRadius="10" Margin="5" BackgroundColor="White" HasShadow="False">
+                                    <StackLayout>
+                                        <Grid BackgroundColor="Pink">
+                                            <Image Margin="20" HorizontalOptions="End" Source="arrowDown.png" HeightRequest="15"></Image>
+                                        </Grid>
+                                    </StackLayout>
+                                </Frame>
+                            </xct:Expander.Header>
+                            <oxy:PlotView Model="{Binding Chart}" HeightRequest="200" WidthRequest="200" />
+                        </xct:Expander>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>-->
+
+        <ScrollView>
+            <StackLayout Spacing="0" BindableLayout.ItemsSource="{Binding KidModels}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <xct:Expander x:Name="expander" Tapped="Expander_Tapped" ClassId="{Binding RowNumber}"
+                                  AnimationLength="0">
+                            <xct:Expander.Header>
+                                <Frame Padding="0" CornerRadius="10" Margin="5" BackgroundColor="White" HasShadow="False">
+                                    <StackLayout>
+                                        <Grid BackgroundColor="Pink">
+                                            <Image Margin="20" HorizontalOptions="End" Source="arrowDown.png" HeightRequest="15"></Image>
+                                        </Grid>
+                                    </StackLayout>
+                                </Frame>
+                            </xct:Expander.Header>
+                            <oxy:PlotView Model="{Binding Chart}" HeightRequest="200" WidthRequest="200" />
+                        </xct:Expander>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+        </ScrollView>
     </StackLayout>
 
 </ContentPage>

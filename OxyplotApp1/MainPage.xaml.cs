@@ -10,6 +10,7 @@ namespace OxyplotApp1
 	public partial class MainPage : ContentPage
 	{
 		Expander expander;
+		ReportsClass item;
 
 
 		public MainPage()
@@ -21,46 +22,77 @@ namespace OxyplotApp1
 		MainPageViewModel VM => (MainPageViewModel)BindingContext;
 
 
-		public void ClearExpander()
+		public void ClearExpanderAndMaybeReportItem()
 		{
 			if (expander != null) {
 				expander.IsExpanded = false;
 				expander = null;
 			}
+			//if (item != null) {
+			//	// Drop previous PlotModel.
+			//	item.Chart = null;
+			//	item = null;
+			//}
 		}
+
+		private bool _entered;
 
 		void Expander_Tapped(System.Object sender, System.EventArgs e)
 		{
+			//if (_entered)
+			//	// Too quick: skip it (may lose a user action).
+			//	return;
+
 			if (ReferenceEquals(sender, expander)) {
 				// User is tapping the existing expander. Don't do anything special.
 				return;
 			}
 
-			ClearExpander();
+			//_entered = true;
+			//Device.BeginInvokeOnMainThread(() => {
+			//	try {
+			_Expander_Tapped(sender);
+			//	} catch (Exception) {
+			//		_entered = false;
+			//	}
+			//});
+		}
 
-			expander = sender as Expander;
+		private void _Expander_Tapped(object sender)
+		{
+			try {
+				ClearExpanderAndMaybeReportItem();
 
-			int index = Convert.ToInt32(expander.ClassId);
-			ReportsClass item = VM.KidModels[index];
+				expander = sender as Expander;
 
-			Device.BeginInvokeOnMainThread(() => {
+				int index = Convert.ToInt32(expander.ClassId);
+				item = VM.KidModels[index];
+
 				if (item.Chart == null) {
 					PlotModel model = MainPageViewModel.CreateBarChart();   // TMS
-					//PlotModel model = CreateReportChart(item);
+																			//PlotModel model = CreateReportChart(item);
+					Action action = () => {
+						item.Chart = model;
+						//_entered = false;
+					};
+					if (false) {
+						action();
+					} else if (false) {
+						Device.BeginInvokeOnMainThread(() => {
+							action();
+						});
+					} else {
+						Device.StartTimer(TimeSpan.FromSeconds(0.5), () => {
+							action();
 
-					item.Chart = model;
+							return false;
+						});
+					}
 				}
-			});
-			//Device.StartTimer(TimeSpan.FromSeconds(0.1), () => {
-			//	if (item.Chart == null) {
-			//		PlotModel model = MainPageViewModel.CreateBarChart();   // TMS
-			//		//PlotModel model = CreateReportChart(item);
 
-			//		item.Chart = model;
-			//	}
-			//	return false;
-			//});
-
+			} catch (Exception) {
+				//_entered = false;
+			}
 		}
 
 		private static PlotModel CreateReportChart(ReportsClass item)
